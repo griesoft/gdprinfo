@@ -1,0 +1,132 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GdprInfo</name>
+    </assembly>
+    <members>
+        <member name="T:GdprInfo.GdprCountries">
+            <summary>
+            A collection of countries in the European Economic Area (Eea) and subject to the GDPR regulation.
+            </summary>
+        </member>
+        <member name="P:GdprInfo.GdprCountries.Countries">
+            <summary>
+            Returns all countries that are in the European Economic Area and subject to the GDPR regulation.
+            </summary>
+        </member>
+        <member name="P:GdprInfo.GdprCountries.IsoCountryCodes">
+            <summary>
+            Returns only the ISO country codes from the EEA country list.
+            </summary>
+        </member>
+        <member name="P:GdprInfo.GdprCountries.CountryNames">
+            <summary>
+            Returns only the country names from the EEA country list.
+            </summary>
+        </member>
+        <member name="P:GdprInfo.GdprCountries.CountryNumbers">
+            <summary>
+            Returns only the country numbers from the EEA country list.
+            </summary>
+        </member>
+        <member name="P:GdprInfo.GdprCountries.LongCountryCodes">
+            <summary>
+            Returns only the long country codes from the EEA country list.
+            </summary>
+        </member>
+        <member name="T:GdprInfo.Country">
+            <summary>
+            Model that contains country name, iso code, number and long alphabetic code.
+            </summary>
+        </member>
+        <member name="T:GdprInfo.GdprInfoService">
+            <summary>
+            Provides information about wheter the current device is in the European Econimic Area (Eea) or not. 
+            If it is, the app should ask for user consent if personal infomration is collected and 
+            processed by the app or other third party apps to comply with the GDPR regulation.
+            </summary>
+        </member>
+        <member name="M:GdprInfo.GdprInfoService.#ctor(GdprInfo.IDeviceCountryIdentifier)">
+            <summary>
+            
+            </summary>
+            <param name="mvxLogProvider"></param>
+            <param name="countryDeviceIdentifier"></param>
+        </member>
+        <member name="P:GdprInfo.GdprInfoService.IsDeviceInEeaOrUnknow">
+            <inheritdoc />
+        </member>
+        <member name="P:GdprInfo.GdprInfoService.IsoCountryCode">
+            <inheritdoc />
+        </member>
+        <member name="P:GdprInfo.GdprInfoService.CountryName">
+            <inheritdoc />
+        </member>
+        <member name="P:GdprInfo.GdprInfoService.CountryNumber">
+            <inheritdoc />
+        </member>
+        <member name="P:GdprInfo.GdprInfoService.LongCountryCode">
+            <inheritdoc />
+        </member>
+        <member name="T:GdprInfo.IDeviceCountryIdentifier">
+            <summary>
+            The purpose of this interface is to be able to fetch the ISO country code of the current device.
+            Network and Sim data should be always prioritized if available.
+            </summary>
+        </member>
+        <member name="M:GdprInfo.IDeviceCountryIdentifier.TryGetDeviceCountryCode">
+            <summary>
+            Try to get the ISO uppercase country code of the current device.
+            </summary>
+            <returns>ISO uppercsae country code or null if not found.</returns>
+        </member>
+        <member name="T:GdprInfo.IGdprInfoService">
+            <summary>
+            Service for looking up country information of the current device and if it is in the
+            European Economic Area / subject to the GDPR regulation or not. 
+            </summary>
+        </member>
+        <member name="P:GdprInfo.IGdprInfoService.IsDeviceInEeaOrUnknow">
+            <summary>
+            Check if the request location of the current device is in the European Economic Area / Eea or unknown.
+            </summary>
+            <remarks>
+            If the location of the current device is unknown this will return true, because we have 
+            to assume that the device might be in the European Economic Area.
+            </remarks>
+        </member>
+        <member name="P:GdprInfo.IGdprInfoService.IsoCountryCode">
+            <summary>
+            Get the ISO country code of the current device. Null in case that no country information
+            could be retrieved from the current device for what ever reason.
+            </summary>
+        </member>
+        <member name="P:GdprInfo.IGdprInfoService.CountryName">
+            <summary>
+            Get the country name of the current device. Null if <see cref="P:GdprInfo.IGdprInfoService.IsoCountryCode"/> is not in EEA.
+            </summary>
+            <remarks>
+            The <see cref="T:GdprInfo.GdprCountries"/> collection only contains detailed information about countries in the EEA.
+            So in case that <see cref="P:GdprInfo.IGdprInfoService.IsoCountryCode"/> isn't included in the collection, this will return null.
+            </remarks>
+        </member>
+        <member name="P:GdprInfo.IGdprInfoService.CountryNumber">
+            <summary>
+            Get the country number of the current device. Null if <see cref="P:GdprInfo.IGdprInfoService.IsoCountryCode"/> is not in EEA.
+            </summary>
+            <remarks>
+            The <see cref="T:GdprInfo.GdprCountries"/> collection only contains detailed information about countries in the EEA.
+            So in case that <see cref="P:GdprInfo.IGdprInfoService.IsoCountryCode"/> isn't included in the collection, this will return null.
+            </remarks>
+        </member>
+        <member name="P:GdprInfo.IGdprInfoService.LongCountryCode">
+            <summary>
+            Get the long country code of the current device. Null if <see cref="P:GdprInfo.IGdprInfoService.IsoCountryCode"/> is not in EEA.
+            </summary>
+            <remarks>
+            The <see cref="T:GdprInfo.GdprCountries"/> collection only contains detailed information about countries in the EEA.
+            So in case that <see cref="P:GdprInfo.IGdprInfoService.IsoCountryCode"/> isn't included in the collection, this will return null.
+            </remarks>
+        </member>
+    </members>
+</doc>
