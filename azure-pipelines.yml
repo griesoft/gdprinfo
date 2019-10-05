@@ -21,7 +21,7 @@ steps:
   inputs:
     restoreSolution: '$(solution)'
 
-- task: MSBuild@1
+- task: VSBuild@1
   inputs:
     solution: '$(solution)'
     platform: '$(buildPlatform)'
@@ -36,4 +36,9 @@ steps:
       !**\*TestAdapter.dll
       !**\obj\**
     searchFolder: '$(System.DefaultWorkingDirectory)'
+    testRunTitle: 'Shared Layer Tests'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
+
 
