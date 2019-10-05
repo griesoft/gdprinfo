@@ -28,6 +28,8 @@ public MyConstructor(IGdprInfoService gdprInfoService)
 }
 ```
 
+**AND**
+
 Check if device is in European Economic Area (EEA):
 
 ```
@@ -60,3 +62,5 @@ But it depends on my time and ofc also on public intrest. It could be even a bet
 ## Contribution
 
 Everyone is welcome to contribute to the project, but please contact @jooni91 first before starting the development of a new feature. Also in terms of bug fixes it would be good to open a issue first.
+
+Adding support for more platforms to the project is very welcome. :wink:
