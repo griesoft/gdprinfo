@@ -33,4 +33,3 @@ steps:
     projects: '**/tests/GdprInfo.Tests/GdprInfo.Tests.csproj'
     testRunTitle: 'Shared Layer Tests'
     workingDirectory: '$(System.DefaultWorkingDirectory)'
-
