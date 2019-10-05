@@ -7,7 +7,7 @@ trigger:
 - dev
 
 pool:
-  vmImage: 'vs2017-win2016'
+  vmImage: 'windows-latest'
 
 variables:
   solution: '**/GdprInfo.sln'
@@ -27,18 +27,10 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- task: VSTest@2
+- task: DotNetCoreCLI@2
   inputs:
-    testSelector: 'testAssemblies'
-    testAssemblyVer2: |
-      **\*test*.dll
-      !**\*TestAdapter.dll
-      !**\obj\**
-    searchFolder: '$(System.DefaultWorkingDirectory)'
-    vsTestVersion: '16.0'
+    command: 'test'
+    projects: '**/tests/GdprInfo.Tests/GdprInfo.Tests.csproj'
     testRunTitle: 'Shared Layer Tests'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
-
-
+    workingDirectory: '$(System.DefaultWorkingDirectory)'
 
