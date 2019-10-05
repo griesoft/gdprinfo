@@ -36,6 +36,7 @@ steps:
       !**\*TestAdapter.dll
       !**\obj\**
     searchFolder: '$(System.DefaultWorkingDirectory)'
+    vsTestVersion: '16.0'
     testRunTitle: 'Shared Layer Tests'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
