@@ -18,8 +18,7 @@ variables:
   solution: '**/GdprInfo.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  outputDirectory: '$(build.binariesDirectory)/$(buildConfiguration)'
-  nugetPackOutputDir: '$(Build.ArtifactStagingDirectory)/Packages'
+  nugetPackOutputDir: '$(Build.ArtifactStagingDirectory)/nuget'
 
 
 
@@ -31,27 +30,26 @@ steps:
     restoreSolution: '$(solution)'
 
 - task: VSBuild@1
+  displayName: Build Solution
   inputs:
     solution: '$(solution)'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
 - task: DotNetCoreCLI@2
+  displayName: Run Tests
   inputs:
     command: 'test'
     projects: '**/tests/GdprInfo.Tests/GdprInfo.Tests.csproj'
     testRunTitle: 'Shared Layer Tests'
     workingDirectory: '$(System.DefaultWorkingDirectory)'
 
-- task: DotNetCoreCLI@2
-  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+- task: MSBuild@1
+  displayName: Pack NuGets
   inputs:
-    command: 'pack'
-    packagesToPack: '**/src/GdprInfo.csproj'
-    configuration: '$(buildConfiguration)'
-    versioningScheme: 'byEnvVar'
-    versionEnvVar: '$(major).$(minor).$(patch)'
-    outputDir: '$(nugetPackOutputDir)'
+    solution: '**/src/GdprInfo.csproj'
+    configuration: $(buildConfiguration)
+    msbuildArguments: '/t:Pack /p:PackageVersion=$(major).$(minor).$(patch) /p:PackageOutputPath="$(nugetPackOutputDir)"'
 
 - task: PublishBuildArtifacts@1
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
