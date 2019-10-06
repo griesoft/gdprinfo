@@ -13,7 +13,7 @@ variables:
   solution: '**/GdprInfo.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  nugetPackOutputDir: '$(Build.ArtifactStagingDirectory)/nuget'
+  nugetPackOutputDir: '$(Build.ArtifactStagingDirectory)/nuget/'
 
 
 
@@ -24,7 +24,7 @@ steps:
     solution: '**/src/GdprInfo.csproj'
     configuration: $(buildConfiguration)
     platform: $(buildPlatform)
-    msbuildArguments: '/restore /t:Build /p:ContinuousIntegrationBuild=true /p:Deterministic=false;BaseOutputPath="$(nugetPackOutputDir)"'
+    msbuildArguments: '/restore /t:Build /p:ContinuousIntegrationBuild=true /p:Deterministic=false;OutputPath="$(nugetPackOutputDir)"'
 
 - task: MSBuild@1
   #condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
