@@ -40,17 +40,10 @@ steps:
   displayName: Run Tests
   inputs:
     command: 'test'
+    publishTestResults: true
     projects: '**/tests/GdprInfo.Tests/GdprInfo.Tests.csproj'
     testRunTitle: 'Shared Layer Tests'
     workingDirectory: '$(System.DefaultWorkingDirectory)'
-
-- task: PublishTestResults@2
-  inputs:
-    testResultsFormat: 'NUnit'
-    testResultsFiles: '**/TEST-*.xml'
-    testRunTitle: 'Shared Layer Tests'
-    buildPlatform: '$(buildPlatform)'
-    buildConfiguration: '$(buildConfiguration)'
 
 - task: MSBuild@1
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
