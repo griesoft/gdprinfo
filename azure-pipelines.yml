@@ -26,14 +26,23 @@ steps:
     platform: $(buildPlatform)
     msbuildArguments: '/restore /t:Build /p:ContinuousIntegrationBuild=true /p:Deterministic=false'
 
-- task: MSBuild@1
-  #condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
-  displayName: Pack NuGets
+# - task: MSBuild@1
+#   #condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+#   displayName: Pack NuGets
+#   inputs:
+#     solution: '**/src/GdprInfo.csproj'
+#     configuration: $(buildConfiguration)
+#     platform: $(buildPlatform)
+#     msbuildArguments: '/t:Pack /p:PackageVersion=$(major).$(minor).$(patch) /p:PackageOutputPath="$(nugetPackOutputDir)"'
+
+- task: NuGetCommand@2
   inputs:
-    solution: '**/src/GdprInfo.csproj'
-    configuration: $(buildConfiguration)
-    platform: $(buildPlatform)
-    msbuildArguments: '/t:Pack /p:PackageVersion=$(major).$(minor).$(patch) /p:PackageOutputPath="$(nugetPackOutputDir)"'
+    command: 'pack'
+    packagesToPack: '**/src/GdprInfo.csproj'
+    packDestination: '$(nugetPackOutputDir)'
+    versioningScheme: 'byEnvVar'
+    versionEnvVar: '$(major).$(minor).$(patch)'
+    includeSymbols: true
 
 - task: DotNetCoreCLI@2
   displayName: Run Tests
@@ -43,10 +52,12 @@ steps:
     projects: '**/tests/GdprInfo.Tests/GdprInfo.Tests.csproj'
     testRunTitle: 'Shared Layer Tests'
     workingDirectory: '$(System.DefaultWorkingDirectory)'
-    
+
+
+
 - task: PublishBuildArtifacts@1
   #condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    PathtoPublish: '$(nugetPackOutputDir)'
     ArtifactName: 'nuget'
     publishLocation: 'Container'
