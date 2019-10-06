@@ -10,11 +10,13 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  solution: '**/GdprInfo.sln'
-  buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release'
-  nugetPackOutputDir: '$(Build.ArtifactStagingDirectory)/nuget/'
-  buildDirPath: '$(Build.SourcesDirectory)/src/bin/$(buildPlatform)/$(buildConfiguration)'
+  - group: 'Package Versioning'
+  - name: buildPlatform
+    value: 'Any CPU'
+  - name: buildConfiguration 
+    value: 'Release'
+  - name: buildDirPath 
+    value: '$(Build.SourcesDirectory)/src/bin/$(buildPlatform)/$(buildConfiguration)'
 
 
 
@@ -28,7 +30,7 @@ steps:
     msbuildArguments: '/restore /t:Build /p:ContinuousIntegrationBuild=true /p:Deterministic=false'
 
 - task: MSBuild@1
-  #condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   displayName: Pack NuGets
   inputs:
     solution: '**/src/GdprInfo.csproj'
@@ -46,7 +48,7 @@ steps:
     workingDirectory: '$(System.DefaultWorkingDirectory)'
 
 - task: PublishBuildArtifacts@1
-  #condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   inputs:
     PathtoPublish: '$(buildDirPath)'
     ArtifactName: 'nuget'
