@@ -5,6 +5,11 @@
 
 trigger:
 - dev
+- master
+
+pr:
+- master
+
 
 pool:
   vmImage: 'windows-latest'
@@ -13,6 +18,10 @@ variables:
   solution: '**/GdprInfo.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
+  outputDirectory: '$(build.binariesDirectory)/$(buildConfiguration)'
+  nugetPackOutputDir: '$(Build.ArtifactStagingDirectory)/Packages'
+
+
 
 steps:
 - task: NuGetToolInstaller@1
@@ -33,3 +42,20 @@ steps:
     projects: '**/tests/GdprInfo.Tests/GdprInfo.Tests.csproj'
     testRunTitle: 'Shared Layer Tests'
     workingDirectory: '$(System.DefaultWorkingDirectory)'
+
+- task: DotNetCoreCLI@2
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  inputs:
+    command: 'pack'
+    packagesToPack: '**/src/GdprInfo.csproj'
+    configuration: '$(buildConfiguration)'
+    versioningScheme: 'byEnvVar'
+    versionEnvVar: '$(major).$(minor).$(patch)'
+    outputDir: '$(nugetPackOutputDir)'
+
+- task: PublishBuildArtifacts@1
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+  inputs:
+    PathtoPublish: '$(nugetPackOutputDir)'
+    ArtifactName: 'nuget'
+    publishLocation: 'Container'
