@@ -14,7 +14,7 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
   nugetPackOutputDir: '$(Build.ArtifactStagingDirectory)/nuget/'
-  buildDirPath: '$(Build.ArtifactStagingDirectory)/bin/$(buildPlatform)/$(buildConfiguration)'
+  buildDirPath: '$(Build.SourcesDirectory)/src/bin/$(buildPlatform)/$(buildConfiguration)'
 
 
 
