@@ -24,7 +24,7 @@ steps:
     solution: '**/src/GdprInfo.csproj'
     configuration: $(buildConfiguration)
     platform: $(buildPlatform)
-    msbuildArguments: '/restore /t:Build /p:ContinuousIntegrationBuild=true /p:Deterministic=false;OutputPath="$(nugetPackOutputDir)"'
+    msbuildArguments: '/restore /t:Build /p:ContinuousIntegrationBuild=true /p:Deterministic=false'
 
 - task: MSBuild@1
   #condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
@@ -47,6 +47,6 @@ steps:
 - task: PublishBuildArtifacts@1
   #condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   inputs:
-    PathtoPublish: '$(nugetPackOutputDir)'
+    PathtoPublish: '$(Build.BinariesDirectory)'
     ArtifactName: 'nuget'
     publishLocation: 'Container'
