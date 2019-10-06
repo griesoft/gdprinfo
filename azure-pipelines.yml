@@ -23,7 +23,8 @@ steps:
   inputs:
     solution: '**/src/GdprInfo.csproj'
     configuration: $(buildConfiguration)
-    msbuildArguments: '/restore /t:Build /p:ContinuousIntegrationBuild=true /p:Deterministic=false'
+    platform: $(buildPlatform)
+    msbuildArguments: '/restore /t:Build /p:ContinuousIntegrationBuild=true /p:Deterministic=false;PackageOutputPath="$(nugetPackOutputDir)"'
 
 - task: MSBuild@1
   #condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
@@ -31,6 +32,7 @@ steps:
   inputs:
     solution: '**/src/GdprInfo.csproj'
     configuration: $(buildConfiguration)
+    platform: $(buildPlatform)
     msbuildArguments: '/t:Pack /p:PackageVersion=$(major).$(minor).$(patch) /p:PackageOutputPath="$(nugetPackOutputDir)"'
 
 - task: DotNetCoreCLI@2
