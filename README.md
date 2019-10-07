@@ -1,9 +1,10 @@
 # GdprInfo
+
 A cross platform Xamarin MvvmCross plugin, with the main purpose of detecting if the current device is in the EEA, which would make it subject to the GDPR regulation. 
 
-| **master** | **dev** | **NuGet** | **GitHub Release** |
-| :---: | :---: | :---: | :---: |
-| [![Build Status](https://dev.azure.com/griesingersoftware/GDPRInfo%20Plugin/_apis/build/status/GdprInfo%20CI%20Pipeline?branchName=master)](https://dev.azure.com/griesingersoftware/GDPRInfo%20Plugin/_build/latest?definitionId=11&branchName=master) | [![Build Status](https://dev.azure.com/griesingersoftware/GDPRInfo%20Plugin/_apis/build/status/GdprInfo%20CI%20Pipeline?branchName=dev)](https://dev.azure.com/griesingersoftware/GDPRInfo%20Plugin/_build/latest?definitionId=11&branchName=dev) | ![Build Status](https://badgen.net/nuget/v/GdprInfo) | ![Build Status](https://badgen.net/github/release/jgdevlabs/gdprinfo) |
+[![Build Status](https://dev.azure.com/griesingersoftware/GDPRInfo%20Plugin/_apis/build/status/GdprInfo%20CI%20Pipeline?branchName=master)](https://dev.azure.com/griesingersoftware/GDPRInfo%20Plugin/_build/latest?definitionId=11&branchName=master)
+[![NuGet](https://badgen.net/nuget/v/GdprInfo)](https://www.nuget.org/packages/GdprInfo)
+[![GitHub Release](https://badgen.net/github/release/jgdevlabs/gdprinfo)](https://github.com/jgdevlabs/gdprinfo/releases)
 
 ## Installation
 
@@ -51,18 +52,19 @@ string? longCountryCode = _gdprInfoService.LongCountryCode;
 
 ## How does it work
 
-The plugin first tries to get the ISO country code via the device telemetry data i.e. network and sim provider information. If we can't get it from there we look it up from the device's current local setting. Reasons for why we couldn't receive it from telemetry data could be for example that the device is in Flight Mode or that the device has no sim card insertd at all.
+The plugin first tries to get the ISO country code via the device telemetry data i.e. network and sim provider information. If we can't get it from there we look it up from the device's current local setting. Reasons for why we couldn't receive it from telemetry data could be for example that the device is in Flight Mode or that the device has no sim card inserted at all.
 
-In case that we couldn't receive ISO code (unknown), we always have to assume that the device owner is in the EEA. So if the ISO code is unknown, ``IsDeviceInEeaOrUnknow`` will return ``true``.
+In case that we couldn't receive the ISO code (unknown), we always have to assume that the device owner is in the EEA. So if the ISO code is unknown, ``IsDeviceInEeaOrUnknow`` will return ``true``.
 
 ## Future Plans
 
-I had thoughts about adding features like user consent storaging and pre-made dialogs for asking the user for consent. This dialogs would need to be modifiable ofc. Also an option for looking up local information from GPS if not found by telemetry data would be nice. This would be optional, because it requires location permission.
+I had thoughts about adding features like user consent storaging and pre-made dialogs for asking the user for consent. 
+Also a feature for looking up ISO county code information from GPS if not found by telemetry data would be nice. This would have to be optional, because it requires location permission and might be suitable only for apps that anyways make use of that permission.
 
-But it depends on my time and ofc also on public intrest. It could be even a better solution to create just a plugin on it's own for some of the features mentioned above.
+Please give me feedback and ideas on what you think could be improved or would make a good new addition to the project.
 
 ## Contribution
 
-Everyone is welcome to contribute to the project, but please contact @jooni91 first before starting the development of a new feature. Also in terms of bug fixes it would be good to open a issue first.
+Everyone is welcome to contribute to the project. But please contact [@jooni91](https://github.com/jooni91) first, before starting the development of a new feature. Also in terms of bug fixes it would be good to open an issue first.
 
-Adding support for more platforms to the project is very welcome. :wink:
+Adding support for more platforms is very welcome. :wink:
