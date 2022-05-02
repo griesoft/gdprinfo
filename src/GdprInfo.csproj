@@ -15,8 +15,8 @@
     <PackageIconUrl></PackageIconUrl>
     <Copyright>2019 © Griesinger Software</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/jgdevlabs/gdprinfo</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/jgdevlabs/gdprinfo</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/griesoft/gdprinfo</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/griesoft/gdprinfo</RepositoryUrl>
     <NeutralLanguage>en</NeutralLanguage>
     <LangVersion>8.0</LangVersion>
     <Nullable>enable</Nullable>
