@@ -2,7 +2,7 @@
 
 A cross platform Xamarin MvvmCross plugin, with the main purpose of detecting if the current device is in the EEA, which would make it subject to the GDPR regulation. 
 
-[![Build Status](https://dev.azure.com/griesingersoftware/GDPRInfo%20Plugin/_apis/build/status/GdprInfo%20CI%20Pipeline?branchName=master)](https://dev.azure.com/griesingersoftware/GDPRInfo%20Plugin/_build/latest?definitionId=11&branchName=master)
+[![Build Status](https://dev.azure.com/griesingersoftware/GDPRInfo%20Plugin/_apis/build/status/GdprInfo%20CI?branchName=master)](https://dev.azure.com/griesingersoftware/GDPRInfo%20Plugin/_build/latest?definitionId=34&branchName=master)
 [![NuGet](https://badgen.net/nuget/v/GdprInfo)](https://www.nuget.org/packages/GdprInfo)
 [![GitHub Release](https://badgen.net/github/release/griesoft/gdprinfo)](https://github.com/griesoft/gdprinfo/releases)
 
