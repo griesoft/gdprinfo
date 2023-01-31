@@ -130,5 +130,17 @@
         <member name="M:GdprInfo.Platforms.Android.DeviceCountryIdentifier.TryGetDeviceCountryCode">
             <inheritdoc />
         </member>
+        <member name="T:GdprInfo.ServicesExtensions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:GdprInfo.ServicesExtensions.ConfigureGdprInfo(Microsoft.Maui.Hosting.MauiAppBuilder)">
+            <summary>
+            
+            </summary>
+            <param name="builder"></param>
+            <returns></returns>
+        </member>
     </members>
 </doc>
