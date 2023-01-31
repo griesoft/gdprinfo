@@ -9,7 +9,7 @@
         /// <summary>
         /// Try to get the ISO uppercase country code of the current device.
         /// </summary>
-        /// <returns>ISO uppercsae country code or null if not found.</returns>
+        /// <returns>ISO uppercase country code or null if not found.</returns>
         string? TryGetDeviceCountryCode();
     }
 }

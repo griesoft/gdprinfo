@@ -1,11 +1,10 @@
 ﻿using System.Globalization;
-using System.Linq;
 
 namespace GdprInfo
 {
     /// <summary>
-    /// Provides information about wheter the current device is in the European Econimic Area (Eea) or not. 
-    /// If it is, the app should ask for user consent if personal infomration is collected and 
+    /// Provides information about whether the current device is in the European Economic Area (EEA) or not. 
+    /// If it is, the app should ask for user consent if personal information is collected and 
     /// processed by the app or other third party apps to comply with the GDPR regulation.
     /// </summary>
     public sealed class GdprInfoService : IGdprInfoService
@@ -15,7 +14,6 @@ namespace GdprInfo
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="mvxLogProvider"></param>
         /// <param name="countryDeviceIdentifier"></param>
         public GdprInfoService(IDeviceCountryIdentifier countryDeviceIdentifier)
         {
@@ -35,7 +33,7 @@ namespace GdprInfo
                     return true;
                 }
 
-                // If any match is found, request location is in Eea
+                // If any match is found, request location is in EEA
                 return GdprCountries.IsoCountryCodes.Any(code => code.ToUpper(CultureInfo.InvariantCulture) == currentCountryCode);
             }
         }

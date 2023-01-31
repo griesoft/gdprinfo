@@ -7,7 +7,7 @@
     public interface IGdprInfoService
     {
         /// <summary>
-        /// Check if the request location of the current device is in the European Economic Area / Eea or unknown.
+        /// Check if the request location of the current device is in the European Economic Area / EEA or unknown.
         /// </summary>
         /// <remarks>
         /// If the location of the current device is unknown this will return true, because we have 

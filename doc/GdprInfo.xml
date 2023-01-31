@@ -41,8 +41,8 @@
         </member>
         <member name="T:GdprInfo.GdprInfoService">
             <summary>
-            Provides information about wheter the current device is in the European Econimic Area (Eea) or not. 
-            If it is, the app should ask for user consent if personal infomration is collected and 
+            Provides information about whether the current device is in the European Economic Area (EEA) or not. 
+            If it is, the app should ask for user consent if personal information is collected and 
             processed by the app or other third party apps to comply with the GDPR regulation.
             </summary>
         </member>
@@ -50,7 +50,6 @@
             <summary>
             
             </summary>
-            <param name="mvxLogProvider"></param>
             <param name="countryDeviceIdentifier"></param>
         </member>
         <member name="P:GdprInfo.GdprInfoService.IsDeviceInEeaOrUnknow">
@@ -78,7 +77,7 @@
             <summary>
             Try to get the ISO uppercase country code of the current device.
             </summary>
-            <returns>ISO uppercsae country code or null if not found.</returns>
+            <returns>ISO uppercase country code or null if not found.</returns>
         </member>
         <member name="T:GdprInfo.IGdprInfoService">
             <summary>
@@ -88,7 +87,7 @@
         </member>
         <member name="P:GdprInfo.IGdprInfoService.IsDeviceInEeaOrUnknow">
             <summary>
-            Check if the request location of the current device is in the European Economic Area / Eea or unknown.
+            Check if the request location of the current device is in the European Economic Area / EEA or unknown.
             </summary>
             <remarks>
             If the location of the current device is unknown this will return true, because we have 
@@ -127,6 +126,9 @@
             The <see cref="T:GdprInfo.GdprCountries"/> collection only contains detailed information about countries in the EEA.
             So in case that <see cref="P:GdprInfo.IGdprInfoService.IsoCountryCode"/> isn't included in the collection, this will return null.
             </remarks>
+        </member>
+        <member name="M:GdprInfo.Platforms.Android.DeviceCountryIdentifier.TryGetDeviceCountryCode">
+            <inheritdoc />
         </member>
     </members>
 </doc>

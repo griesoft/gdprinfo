@@ -1,17 +1,15 @@
 ﻿using System.Globalization;
-using Android.App;
 using Android.Telephony;
-using Java.Util;
 
 namespace GdprInfo.Platforms.Android
 {
     public sealed class DeviceCountryIdentifier : IDeviceCountryIdentifier
     {
-        private readonly TelephonyManager _telephonyManager;
+        private readonly TelephonyManager? _telephonyManager;
 
         private DeviceCountryIdentifier()
         {
-            _telephonyManager = TelephonyManager.FromContext(Application.Context);
+            _telephonyManager = TelephonyManager.FromContext(global::Android.App.Application.Context);
         }
 
         internal static DeviceCountryIdentifier CreateDeviceCountryIdentifier()
@@ -22,7 +20,7 @@ namespace GdprInfo.Platforms.Android
         /// <inheritdoc />
         public string? TryGetDeviceCountryCode()
         {
-            if (!TryGetNetworkBasedCountryCode(out string code))
+            if (!TryGetNetworkBasedCountryCode(out string? code))
             {
                 if (!TryGetSimBasedCountryCode(out code))
                 {
@@ -33,25 +31,25 @@ namespace GdprInfo.Platforms.Android
             return string.IsNullOrEmpty(code) ? null : code.ToUpper(CultureInfo.InvariantCulture);
         }
 
-        private bool TryGetNetworkBasedCountryCode(out string code)
+        private bool TryGetNetworkBasedCountryCode(out string? code)
         {
-            if (_telephonyManager.PhoneType == PhoneType.Gsm)
+            if ((_telephonyManager?.PhoneType ?? PhoneType.None) == PhoneType.Gsm)
             {
-                return !string.IsNullOrEmpty(code = _telephonyManager.NetworkCountryIso);
+                return !string.IsNullOrEmpty(code = _telephonyManager?.NetworkCountryIso);
             }
 
             code = "";
             return false;
         }
 
-        private bool TryGetSimBasedCountryCode(out string code)
+        private bool TryGetSimBasedCountryCode(out string? code)
         {
-            return !string.IsNullOrEmpty(code = _telephonyManager.SimCountryIso);
+            return !string.IsNullOrEmpty(code = _telephonyManager?.SimCountryIso);
         }
 
         private bool TryGetLocalCountryCode(out string code)
         {
-            return !string.IsNullOrEmpty(code = Locale.Default.Country);
+            return !string.IsNullOrEmpty(code = Java.Util.Locale.Default.Country);
         }
     }
 }

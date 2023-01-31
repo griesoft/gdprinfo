@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace GdprInfo
+﻿namespace GdprInfo
 {
     /// <summary>
     /// A collection of countries in the European Economic Area (Eea) and subject to the GDPR regulation.
